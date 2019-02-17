@@ -18,7 +18,7 @@ jobs:
           command: ./gradlew androidDependencies
       - run:
         name: Gradle build
-        command: ./gradlew -PciBuild=true :app:assembleDebug :app:assembleAndroidTest
+        command: ./gradlew assembleDebug
 
       - store_artifacts:
             path: app/build/outputs/apk/
