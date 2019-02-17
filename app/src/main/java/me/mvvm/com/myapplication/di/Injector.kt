@@ -2,6 +2,7 @@ package me.mvvm.com.myapplication.di
 
 import me.mvvm.com.myapplication.AndroidApplication
 import me.mvvm.com.myapplication.mainscreen.di.MainComponent
+import me.mvvm.com.myapplication.mainscreen.di.MainModule
 
 /**
  * Created by Alexander Karpenko on 09.09.18.
@@ -33,7 +34,7 @@ open class Injector {
 
     fun plusMainActivity(): MainComponent {
         if (mainComponent == null) {
-//            mainComponent = component.plus(MainModule())
+            mainComponent = component.plus(MainModule())
         }
         return mainComponent as MainComponent
     }
