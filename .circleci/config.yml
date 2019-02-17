@@ -16,11 +16,13 @@ jobs:
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
-
-     - run:
-          name: Apk
-          command: ./gradlew :app:assembleDebug :app:assembleAndroidTest
-
+   - *save_cache
+    - *export_gservices_key
+    - *decode_gservices_key
+    - run:
+        name: Gradle build (debug)
+        command: ./gradlew -PciBuild=true :app:assembleDebug :app:assembleAndroidTest
+    - *persist_debug_workspace
       - save_cache:
           paths:
             - ~/.gradle
