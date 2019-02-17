@@ -16,10 +16,11 @@ jobs:
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
-          command: ./gradlew -PciBuild=true :app:assembleDebug :app:assembleAndroidTest
+
      - run:
-                    name: Apk
-                    command: ./gradlew -PciBuild=true :app:assembleDebug :app:assembleAndroidTest
+          name: Apk
+          command: ./gradlew -PciBuild=true :app:assembleDebug :app:assembleAndroidTest
+
       - save_cache:
           paths:
             - ~/.gradle
