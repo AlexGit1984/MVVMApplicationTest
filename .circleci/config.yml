@@ -17,7 +17,7 @@ jobs:
           name: Download Dependencies
           command: ./gradlew androidDependencies
       - run:
-        name: Gradle build (debug)
+        name: Gradle build
         command: ./gradlew -PciBuild=true :app:assembleDebug :app:assembleAndroidTest
 
       - store_artifacts:
