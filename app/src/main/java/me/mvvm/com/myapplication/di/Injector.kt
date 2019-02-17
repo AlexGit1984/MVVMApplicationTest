@@ -23,7 +23,7 @@ open class Injector {
         @JvmStatic
         fun init(app: AndroidApplication?) {
             msInjector?.component = DaggerAppComponent.builder()
-                    .appModule(AppModule(app))
+//                    .appModule(AppModule(app))
                     .roomModule(RoomModule(app))
                     .networkApiModule(NetworkApiModule(app?.applicationContext))
                     .build()
