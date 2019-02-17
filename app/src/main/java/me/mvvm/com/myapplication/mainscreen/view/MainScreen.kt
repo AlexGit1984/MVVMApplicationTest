@@ -13,8 +13,6 @@ import me.mvvm.com.myapplication.R
 import me.mvvm.com.myapplication.data.database.User
 import me.mvvm.com.myapplication.mainscreen.viewmodel.MainActivityVM
 import me.mvvm.com.myapplication.ui.viewModels.base.BaseActivity
-import java.lang.IllegalStateException
-import java.util.*
 
 /**
  * Created by Alexander Karpenko on 09.09.18.
@@ -30,10 +28,11 @@ class MainScreen : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         viewModel = ViewModelProviders.of(this).get(MainActivityVM::class.java)
-        viewModel.getResponse()?.observe(this, Observer<User> {
+        viewModel.getUser()
+        viewModel.getResponse()?.observe(this, Observer<List<User>> {
             sample_txt.text = it.toString()
         })
-        button.setOnClickListener { viewModel.changeName("John with id =  " + UUID.randomUUID().toString()) }
+        button.setOnClickListener { viewModel.getUser() }
 
     }
 

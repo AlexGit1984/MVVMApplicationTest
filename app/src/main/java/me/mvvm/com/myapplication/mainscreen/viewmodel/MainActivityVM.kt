@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 class MainActivityVM : BaseViewModel() {
 
-    private var answer: MutableLiveData<User>? = null
+    private var answer: MutableLiveData<List<User>>? = null
 
     @Inject
     lateinit var db: LocalDatabase
@@ -27,39 +27,54 @@ class MainActivityVM : BaseViewModel() {
 
     lateinit var user: User
 
+    var i: Int = 0
+
     init {
         Injector.msInjector?.plusMainActivity()?.inject(this)
     }
 
 
-    fun getResponse(): LiveData<User>? {
+    fun getResponse(): LiveData<List<User>>? {
         if (answer == null) {
             answer = MutableLiveData()
             getUser()
-            disposal.add(db.localUserDao().getData(1)?.subscribe({
-                it: User ->
-                answer?.postValue(it) }))
+            disposal.add(db.localUserDao().getDataList()?.subscribe({ it: List<User> ->
+                answer?.postValue(it)
+            }))
         }
+//        var liveData = db.localUserDao().getData(1)
+//        return liveData
+//            answer?.postValue( .
+//            disposal.add(db.localUserDao().getData(1)?.subscribe({
+//                it: User ->
+//                answer?.postValue(it) }))
+
         return answer
     }
 
 
     fun getUser() {
-     api.getDataServer().subscribe({idt: User? ->
-         Log.d("MVVM", "response = " +idt?.name)
-         user=idt!!
-         db.localUserDao().insertData(idt)
+        api.getDataServer().subscribe({ idt: User? ->
+            Log.d("MVVM", "response = " + idt?.name)
+            user = idt!!
 
-     })
+            user.let {
+                it.name = "Hi ".plus(i++)
+            }
+            db.localUserDao().insertData(user)
+
+        })
 
     }
 
+
     fun changeName(s: String) {
-  Thread(Runnable {
-      db.localUserDao().updateData(user.also {
-          it.id=1
-          it.name=s })
-  }).start()
+        Thread(Runnable {
+            db.localUserDao().updateData(user.also {
+                it.id = 1
+                it.name = s
+            })
+        }).start()
 
     }
 

@@ -6,7 +6,7 @@ import me.mvvm.com.myapplication.AndroidApplication
 import javax.inject.Singleton
 
 
-@Module ()
+@Module
 class AppModule(private val application: AndroidApplication?) {
 
     @Provides
