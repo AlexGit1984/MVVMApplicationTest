@@ -13,14 +13,17 @@ jobs:
 #      - run:
 #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
 #         command: sudo chmod +x ./gradlew
-     - run:
-            name: Gradle build (debug)
+      - run:
+          name: Download Dependencies
+          command: ./gradlew androidDependencies
+          command: ./gradlew -PciBuild=true :app:assembleDebug :app:assembleAndroidTest
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 
-            command: ./gradlew -PciBuild=true :app:assembleDebug :app:assembleAndroidTest
-
-        - *persist_debug_workspace
-        - store_artifacts:
-
+      - store_artifacts:
             path: app/build/outputs/apk/
-
             destination: /apk/
+      - store_test_results:
+          path: app/build/test-results
