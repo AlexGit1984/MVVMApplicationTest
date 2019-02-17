@@ -16,17 +16,9 @@ jobs:
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
-   - *save_cache
-    - *export_gservices_key
-    - *decode_gservices_key
-    - run:
+      - run:
         name: Gradle build (debug)
         command: ./gradlew -PciBuild=true :app:assembleDebug :app:assembleAndroidTest
-    - *persist_debug_workspace
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 
       - store_artifacts:
             path: app/build/outputs/apk/
