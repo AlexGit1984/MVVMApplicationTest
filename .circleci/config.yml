@@ -17,8 +17,8 @@ jobs:
           name: Download Dependencies
           command: ./gradlew androidDependencies
       - run:
-        name: Gradle build
-        command: ./gradlew assembleDebug
+          name: Gradle build
+          command: ./gradlew assembleDebug
 
       - store_artifacts:
             path: app/build/outputs/apk/
