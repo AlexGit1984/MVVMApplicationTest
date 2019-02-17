@@ -19,7 +19,7 @@ jobs:
 
      - run:
           name: Apk
-          command: ./gradlew -PciBuild=true :app:assembleDebug :app:assembleAndroidTest
+          command: ./gradlew :app:assembleDebug :app:assembleAndroidTest
 
       - save_cache:
           paths:
