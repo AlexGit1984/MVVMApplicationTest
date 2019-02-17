@@ -8,7 +8,7 @@ import android.arch.persistence.room.RoomDatabase
  * java.karpenko@gmail.com
  */
 
-@Database(version = 1, entities = arrayOf(User::class))
+@Database(version = 1, entities = arrayOf(User::class), exportSchema = false)
 abstract class LocalDatabase :RoomDatabase(){
     abstract fun localUserDao(): UserLocalDao
 }

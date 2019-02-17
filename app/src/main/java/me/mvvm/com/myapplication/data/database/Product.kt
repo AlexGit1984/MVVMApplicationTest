@@ -7,14 +7,5 @@ package me.mvvm.com.myapplication.data.database
 data class Product(var price: String?) {
 
 
-    fun requestPriceUpdates(mListener: (String) -> Unit) {
-
-
-    }
-
-    fun removeUpdates(mListener: (String) -> Unit) {
-
-    }
-
 
 }
